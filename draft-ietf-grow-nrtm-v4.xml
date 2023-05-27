@@ -103,8 +103,9 @@
     </t>
 
     <t>
-      Most of these well known IRR Databases mirror IRR objects from some others, so that queries run against these instances provide a comprehensive view.
-      Some parties also mirror IRR Databases to private IRR server instances, to reduce latency in queries, analyze IRR objects, or other purposes.
+      IRR Database comprises one or more IRR Database Source, with each source representing an authoritative entity responsible for creating and publishing routing objects to the database.
+      Most of these well known IRR Databases mirror IRR objects from some others, so that queries executed against these instances provide a comprehensive view.
+      Some parties also mirror IRR Databases to private IRR server instances in order to reduce query latency, analyze IRR objects, or other purposes.
     </t>
 
     <t>
@@ -112,15 +113,15 @@
       In NRTMv4, IRR Databases publish their records on an HTTPS endpoint, with periodic Snapshot Files and regular Delta Files.
       Signing allows integrity checks.
       By only generating files once and publishing them over HTTPS, scalability is dramatically improved.
-      It borrows some concepts in <xref target="RFC8182"/>, as there are overlaps between the two protocols.
+      This RFC incorporates some concepts from <xref target="RFC8182"/>, as there are overlaps between the two protocols.
     </t>
 
   </section>
 
   <section title="Informal overview">
     <t>
-      In NRTMv4, a mirror server is an instance of IRR Database software that has a database of IRR objects and publishes them to allow mirroring by others.
-      This can be retrieved by mirror clients, which then load the IRR objects into their local storage.
+      In NRTMv4, a mirror server is an instance of IRR Database software database of IRR objects and publishes them to allow mirroring by others
+      Mirror clients can retreive this data and then load published IRR objects into their local storage.
     </t>
     <t>
       Publication consists of three different files:
@@ -166,20 +167,20 @@
        Note that in NRTMv4, a contiguous version number is used for the Database version and Delta Files.
        This is different and unrelated to the serial in NRTMv3.
        NRTMv3 serials refer to a single change to a single object, whereas a NRTMv4 version refers to one delta, possibly containing multiple changes to multiple objects.
-       NRTMv3 serials can also contain gaps, NRTMv4 versions may not.
+       NRTMv3 serials can also contain gaps, NRTMv4 version numbers may not.
       </t>
     </section>
 
   <section title="Mirror server use">
     <section title="Key Configuration">
       <t>
-        When enabling NRTMv4 publication for an IRR Database, the operator MUST generate and configure a private Ed25519 <xref target="RFC8032"/> key.
-        The operator then provides this public key, the name of the IRR Database, and publication URL of the Update Notification File to any operators of mirror clients.
+        When enabling NRTMv4 publication for an IRR Database, the IRR Database operator MUST generate and configure a private Ed25519 <xref target="RFC8032"/> key.
+        The IRR Database operator then provides this public key, the name of the IRR Database, and publication URL of the Update Notification File to any operators of mirror clients.
         The process for providing this is not in scope of this protocol, but a typical case is publication on the operator's known website.
         Key rotation is described in <xref target="public_key_rotation" />.
       </t>
       <t>
-        It is RECOMMENDED that implementations provide easily accessible tools for operators to generate new Ed25519 keys to enter into their configuration and assist with key rotation.
+        It is RECOMMENDED that implementations provide easily accessible tools for IRR Database operators to generate new Ed25519 keys to enter into their configuration and assist with key rotation.
         All configuration options SHOULD be clearly named to indicate that they are private keys.
       </t>
     </section>
@@ -323,7 +324,7 @@
           The client MUST retrieve the Update Notification File.
         </t>
         <t>
-          The client MUST verify that the source attribute in the Update Notification File matches the configured IRR Database name.
+          The client MUST verify that the source attribute in the Update Notification File matches the configured IRR Database Source name.
         </t>
         <t>
           The client MUST retrieve the Snapshot File and load the objects into its local storage.
