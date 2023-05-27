@@ -113,7 +113,7 @@
       In NRTMv4, IRR Databases publish their records on an HTTPS endpoint, with periodic Snapshot Files and regular Delta Files.
       Signing allows integrity checks.
       By only generating files once and publishing them over HTTPS, scalability is dramatically improved.
-      This RFC incorporates some concepts from <xref target="RFC8182"/>, as there are overlaps between the two protocols.
+      This RFC incorporates some concepts of <xref target="RFC8182"/>, as there are overlaps between the two protocols.
     </t>
 
   </section>
